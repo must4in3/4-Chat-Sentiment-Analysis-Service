@@ -57,9 +57,7 @@ def adduser(conversation_id):
         user_id_2 = transform_strings_ObjectId(user_id)      
         if not user_id_2:
             raise APIError('Error. user_id doesn\'t exist in database. It is not possible to add user in this chat')
-        print(conversation_id, ''.join(user_id_2))
         check_usuario = db.chatItem.find_one({"_id" : ObjectId(conversation_id),'users_ids': {'$eq': ''.join(user_id_2)}}, {'_id':0})
-        print(check_usuario)
         if not check_usuario:  
             update = db.chatItem.update({ "_id" : ObjectId(conversation_id)}, {'$addToSet': {"users_ids" : ''.join(user_id_2)}})  
             update2 = db.chatItem.find_one({"_id" : ObjectId(conversation_id)}, {'_id':0})       
@@ -68,6 +66,28 @@ def adduser(conversation_id):
         raise APIError('Error. user_id already in this chat')                  
 
 
+@app.route("/chat/<conversation_id>/addmessage")
+#@errorHelper(['user_id','text'])
+def addmessage(conversation_id):
+    print(f'Requesting to add a message in a chat-room {conversation_id}')
+    chat = db.chatItem.find_one({'_id': ObjectId(conversation_id)})
+    if chat:     
+        user_id = request.args.get('user_id')
+        text_add = request.args.get('text') 
+        user_id_2 = transform_strings_ObjectId(user_id)
+        if not user_id_2:
+            raise APIError('Error. user_id doesn\'t exist in database. It is not possible to add user in this chat')
+        check_usuario = db.chatItem.find_one({"_id" : ObjectId(conversation_id),'users_ids': {'$eq': ''.join(user_id_2)}}, {'_id':0})
+        if check_usuario:  
+            update = db.chatItem.update({ "_id" : ObjectId(conversation_id)}, {'$set':{"messages" : text_add}})
+            return {'miao':'bau'}
+
+
+
+
+
+
+#
 def transform_strings_ObjectId(users):
     '''
     when the object_id is retrieved from the url it is in the form of a string.
