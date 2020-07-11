@@ -14,11 +14,6 @@ db = client.get_default_database()['user']
 def get_user(username):
     #username = request.args.get('username') this is for query parameter
     print(f'Requesting to create the username {username}')
-    #if not username:
-    #    return {
-    #        'status':'error',
-    #        'message':'Please provide a valid username with ?username=<tu_username> '
-    #    }
     res = db.find_one({'username' : username,}, {'_id':0})
     if res:
         return {
