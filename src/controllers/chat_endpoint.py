@@ -49,6 +49,12 @@ def get_chat(chat_name):
 @app.route("/chat/<conversation_id>/adduser")
 @errorHelper('user_id')
 def adduser(conversation_id):
+    '''
+    This function allows you to add a user to a conversation. 3 errors are reported:
+    1) the user may not yet be registered.
+    2) the user is already present in the conversation
+    3) chat doesn't exist
+    '''
     print(f'Requesting to add users in the chat-room {conversation_id}')
     chat = db.chatItem.find_one({'_id': ObjectId(conversation_id)})
     if chat:
@@ -69,6 +75,12 @@ def adduser(conversation_id):
 @app.route("/chat/<conversation_id>/addmessage")
 @errorHelper(['user_id','text'])
 def addmessage(conversation_id):
+    '''
+    This function allows you to add a new message in a conversation. 3 errors are reported:
+    1) the user may not yet be registered.
+    2) the user is already present in the conversation
+    3) chat doesn't exist
+    '''
     print(f'Requesting to add a message in a chat-room {conversation_id}')
     chat = db.chatItem.find_one({'_id': ObjectId(conversation_id)})
     if chat:     
@@ -95,6 +107,9 @@ def addmessage(conversation_id):
 @app.route("/chat/<conversation_id>/list")
 @errorHelper()
 def listMessage(conversation_id):
+    '''
+    This function allows you to download and view the messages of a conversation through a request from the API
+    '''
     print(f'Requesting to list all message in the chat-room {conversation_id}')
     chat = db.chatItem.find_one({'_id': ObjectId(conversation_id)})
     if chat:

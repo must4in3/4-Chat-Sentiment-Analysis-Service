@@ -22,6 +22,9 @@ db = client.get_default_database()
 @app.route("/chat/<conversation_id>/sentiment")
 @errorHelper()
 def sentimentAnalysis(conversation_id):
+    '''
+    This function receives an Id_conversation as a parameter, returning a sentiment analysis of all chat messages
+    '''
     print(f'Requesting to a sentiment analysis from the chat-room {conversation_id}')
     chat = db.chatItem.find_one({'_id': ObjectId(conversation_id)})
     if chat:
@@ -39,6 +42,10 @@ def sentimentAnalysis(conversation_id):
 
 
 def polarityBySentence(phrases_list):
+    '''
+    This function performs a part of the sentimentAnalysis function process.
+    In particular, it carries out the process of dividing sentences into shorter sentences and carrying out a polarity analysis
+    '''
     sid = SentimentIntensityAnalyzer()
     pol = []
     for phrase in phrases_list:

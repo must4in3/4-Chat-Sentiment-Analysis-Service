@@ -15,9 +15,14 @@ client = MongoClient(DBURL)
 print(f'connected to db {DBURL}')
 db = client.get_default_database()
 
+
 @app.route("/user/<user_id>/recommend")
 @errorHelper()
 def recommenderAnalysis(user_id):
+    '''
+    This function allows you to perform a recommendation analysis of similar users.
+    Based on the topics of the chats, it is possible to identify users who may have affinities with the selected user
+    '''
     print(f'Requesting by {user_id} for a recommendation of users with similar characteristics')
     user = db.chatItem.find({'users_ids' : {'$eq': user_id}})
     if len(list(user)) != 0:
@@ -40,8 +45,10 @@ def recommenderAnalysis(user_id):
     raise APIError('The user is not present in any chat')
     
 
-
 def createMatrixSimilarity(dictionary_chat_mess, user_id):
+    '''
+    This function allows you to create a similarity matrix of the selected user.
+    '''
     # create pandas df
     df_quote = pd.DataFrame(dictionary_chat_mess)
     # dataframe aggregated with all users with the phrases said in every chat
