@@ -14,6 +14,10 @@ db = client.get_database()['user']
 @app.route("/user/create/<username>")
 @errorHelper()
 def get_user(username):
+    '''
+    This function allows you to create a new username.
+    If it is already present in the app database, an error will be displayed
+    '''
     #username = request.args.get('username') this is for query parameter
     print(f'Requesting to create the username {username}')
     res = db.find_one({'username' : username,}, {'_id':0})
