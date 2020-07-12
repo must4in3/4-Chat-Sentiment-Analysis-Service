@@ -63,6 +63,7 @@ def adduser(conversation_id):
             res = get_response_dict('Ok','Ok',len(user_id_2),update2)
             return update2 
         raise APIError('Error. user_id already in this chat')                  
+    raise APIError('Error. chat doesn\'t exist') 
 
 
 @app.route("/chat/<conversation_id>/addmessage")
@@ -78,13 +79,32 @@ def addmessage(conversation_id):
         if not user_id_2:
             raise APIError('Error. user_id doesn\'t exist in database. It is not possible to add user in this chat')
         check_usuario = db.chatItem.find_one({"_id" : ObjectId(conversation_id),'users_ids': {'$eq': ''.join(user_id_2)}}, {'_id':0})
+        username = db.user.find_one({'_id': ObjectId(user_id)})
         if check_usuario:
-            update = db.chatItem.update({ "_id" : ObjectId(conversation_id)}, {'$addToSet':{"messages" : text_add_2}})
+            update = db.chatItem.update({ "_id" : ObjectId(conversation_id)}, 
+                                        {'$addToSet':{"messages" : 
+                                        {'username':username['username'], 'user_id':text_add_2['user_id'], 'message':text_add_2['text']}}})
             return {
                     'conversation_id':conversation_id,
                     'messages': text_add_2
                     } 
         raise APIError('Error. user_id doesn\'t exist in this chat')
+    raise APIError('Error. chat doesn\'t exist') 
+
+
+@app.route("/chat/<conversation_id>/list")
+@errorHelper()
+def listMessage(conversation_id):
+    print(f'Requesting to list all message in the chat-room {conversation_id}')
+    chat = db.chatItem.find_one({'_id': ObjectId(conversation_id)})
+    if chat:
+        chat_json = json.loads(json_util.dumps(chat))
+        return { 
+                'conversation_id': chat_json['_id'],
+                'chat_name': chat_json['chat_name'],
+                'messages': chat_json['messages']
+                }
+    raise APIError('Error. chat doesn\'t exist')    
 
 
 def transform_strings_ObjectId(users):
