@@ -1,7 +1,8 @@
 from src.app import app
 from flask import request
 from pymongo import MongoClient
-from bson.objectid import ObjectId
+import json
+from bson import json_util, ObjectId
 from src.config import DBURL
 from src.helpers.errorHelpers import errorHelper, APIError, Error404, checkValidParams
 import re
@@ -10,6 +11,8 @@ import re
 client = MongoClient(DBURL)
 print(f'connected to db {DBURL}')
 db = client.get_default_database()
+
+
 @app.route("/chat/create/<chat_name>")
 @errorHelper('user_id')
 def get_chat(chat_name):
@@ -27,23 +30,19 @@ def get_chat(chat_name):
     # define query params and use the users_id array to check if the Ids are corrects through the function transform_strings_ObjectId() 
     user_id = request.args.get('user_id')
     user_id_2 = transform_strings_ObjectId(user_id)
-    # create empty room
     if not user_id_2:
-        #chat_room = db.chatItem.insert_one({'chat_name' : chat_name})
-        #res = db.chatItem.find_one({'chat_name' : chat_name}, {'_id':0})
-        #res = get_response_dict('Ok','Error. users_ids doesn\'t exist in database',0,res)
-        #return res
         raise APIError('Error. users_ids doesn\'t exist in database. It is not possible to create an empty chat')
     # create room with users
     chat_room = db.chatItem.insert_one({'chat_name' : chat_name, 
                                'users_ids': [u_id if db.user.find_one({'_id': ObjectId(u_id)}) else None for u_id in user_id_2]})              
-    res = db.chatItem.find_one({'chat_name' : chat_name}, {'_id':0})
+    res = db.chatItem.find_one({'chat_name' : chat_name})
+    res_ok2 = json.loads(json_util.dumps(res))
     # check if every users are inside the room
     if len(user_id.split(',')) == len(user_id_2):
-        res = get_response_dict('Ok','Ok',len(user_id_2),res)
+        res = get_response_dict('Ok','Ok',len(user_id_2),res_ok2)
         return res
     else:
-        res = get_response_dict('Ok','Some user_id did not exist in the database, or you tried insert the same id many times',len(user_id_2),res)
+        res = get_response_dict('Ok','Some user_id did not exist in the database, or you tried insert the same id many times',len(user_id_2),res_ok2)
         return res
 
 
@@ -67,27 +66,27 @@ def adduser(conversation_id):
 
 
 @app.route("/chat/<conversation_id>/addmessage")
-#@errorHelper(['user_id','text'])
+@errorHelper(['user_id','text'])
 def addmessage(conversation_id):
     print(f'Requesting to add a message in a chat-room {conversation_id}')
     chat = db.chatItem.find_one({'_id': ObjectId(conversation_id)})
     if chat:     
         user_id = request.args.get('user_id')
         text_add = request.args.get('text') 
+        text_add_2=request.args.to_dict(text_add)
         user_id_2 = transform_strings_ObjectId(user_id)
         if not user_id_2:
             raise APIError('Error. user_id doesn\'t exist in database. It is not possible to add user in this chat')
         check_usuario = db.chatItem.find_one({"_id" : ObjectId(conversation_id),'users_ids': {'$eq': ''.join(user_id_2)}}, {'_id':0})
-        if check_usuario:  
-            update = db.chatItem.update({ "_id" : ObjectId(conversation_id)}, {'$set':{"messages" : text_add}})
-            return {'miao':'bau'}
+        if check_usuario:
+            update = db.chatItem.update({ "_id" : ObjectId(conversation_id)}, {'$addToSet':{"messages" : text_add_2}})
+            return {
+                    'conversation_id':conversation_id,
+                    'messages': text_add_2
+                    } 
+        raise APIError('Error. user_id doesn\'t exist in this chat')
 
 
-
-
-
-
-#
 def transform_strings_ObjectId(users):
     '''
     when the object_id is retrieved from the url it is in the form of a string.
