@@ -28,8 +28,8 @@ endpoints and it's our task to create those endpoints for:
   - **Returns:** `user_id`
 
 
-**@get**
-### Create username
+# **@get requests**
+## Create username
 /user/create/<username>
 
 With this extension of the URL it is possible to add a user into the Database.
@@ -37,7 +37,7 @@ With this extension of the URL it is possible to add a user into the Database.
 url = http://localhost:3000/user/create/`Topolino`
 res = requests.get(`url`)
 
-### Create chat
+## Create chat
 /chat/create/<chat_name> params=`user_id` 
 
 With this extension of the URL it is possible to create a new chat room
@@ -47,7 +47,7 @@ Various if conditions will try to avoid errors (if the room already exists, if t
 url = http://localhost:3000/chat/create/`Dumbledore’s Army`?user_id=`5f0ca75239a4fd996c03d54c`
 res = requests.get(`url`)
 
-### Add user into a chat
+## Add user into a chat
 /chat/<conversation_id>/adduser params=`user_id` 
 
 This endpoint allows you to add a user to a conversation.
@@ -56,7 +56,7 @@ The system will allow you this only if the user is already present in the databa
 url = http://localhost:3000/chat/`5f0ca76d39a4fd996c03d553`/adduser?user_id=`5f0ca75239a4fd996c03d54c`
 res = requests.get(`url`)
 
-### Insert message into a chat
+## Insert message into a chat
 /chat/<conversation_id>/addmessage params=`user_id`,`text`
 
 This endpoint allows you to insert a new message into a conversation.
@@ -65,7 +65,7 @@ The system will allow you this only if the user is already present in the databa
 url = http://localhost:3000/chat/`5f0ca76d39a4fd996c03d553`/addmessage?user_id=`5f0ca75239a4fd996c03d54c`&text=`Hello world`
 res = requests.get(`url`)
 
-### Get messages list from a chat
+## Get messages list from a chat
 /chat/<conversation_id>/list
 
 This endpoint allows you to download and view the messages of a conversation through a request from the API.
@@ -73,7 +73,7 @@ This endpoint allows you to download and view the messages of a conversation thr
 url =  http://localhost:3000/chat/`5f0ca76d39a4fd996c03d553`/list
 res = requests.get(`url`)
 
-### Recommender analisys
+## Recommender analisys
 /user/<user_id>/recommend
 
 This endpoint allows you to perform a recommendation analysis of similar users.
@@ -82,7 +82,7 @@ Based on the topics of the chats, it is possible to identify users who may have 
 url =  http://localhost:3000/user/`5f0ca75239a4fd996c03d54c`/recommend
 res = requests.get(`url`)
 
-### Sentiment analisys
+## Sentiment analisys
 /chat/<conversation_id>/sentiment
 
 This endpoint receives an Id_conversation as a parameter, returning a sentiment analysis of all chat messages.
@@ -100,7 +100,7 @@ Through the geographic coordinates WGS84 (lat and long) it is possible to geoloc
 
 
 
-​
+
 * Create an API using `flask`
 * Use `pymongo` insert methods
 * NLTK sentiment analysis
