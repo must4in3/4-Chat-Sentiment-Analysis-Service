@@ -10,7 +10,7 @@ import re
 
 client = MongoClient(DBURL)
 print(f'connected to db {DBURL}')
-db = client.get_default_database()
+db = client.get_database()
 
 
 @app.route("/chat/create/<chat_name>")
@@ -18,7 +18,6 @@ db = client.get_default_database()
 def get_chat(chat_name):
     '''
     Function that allows you to create a new chat-room.
-    If "users" query parameters exist, you also can populate the room. 
     The function returns JSON files to the web localhost and allows you to add new data to the mongoDb database. 
     Various if conditions will try to avoid errors (if the room already exists,
     if the user IDs are incorrect or already existing etc ..)
