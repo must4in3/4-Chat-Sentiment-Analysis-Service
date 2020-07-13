@@ -34,7 +34,7 @@ endpoints and it's our task to create those endpoints for:
 
 With this extension of the URL it is possible to add a user into the Database.
 
-`url = http://localhost:3000/user/create/Topolino`
+`url = http://localhost:3000/user/create/Topolino`<br/>
 `res = requests.get(url)`
 
 ### Create chat
@@ -44,7 +44,7 @@ With this extension of the URL it is possible to create a new chat room
 This endpoint returns JSON files to the web localhost and allows you to add new data to the mongoDb database. 
 Various if conditions will try to avoid errors (if the room already exists, if the user IDs are incorrect or already existing etc ..)
 
-`url = http://localhost:3000/chat/create/Dumbledore’s Army?user_id=5f0ca75239a4fd996c03d54c`
+`url = http://localhost:3000/chat/create/Dumbledore’s Army?user_id=5f0ca75239a4fd996c03d54c`<br/>
 `res = requests.get(url)`
 
 ### Add user into a chat
@@ -53,7 +53,7 @@ Various if conditions will try to avoid errors (if the room already exists, if t
 This endpoint allows you to add a user to a conversation.
 The system will allow you this only if the user is already present in the database and is not present yet in the conversation.
 
-`url = http://localhost:3000/chat/5f0ca76d39a4fd996c03d553/adduser?user_id=5f0ca75239a4fd996c03d54c`
+`url = http://localhost:3000/chat/5f0ca76d39a4fd996c03d553/adduser?user_id=5f0ca75239a4fd996c03d54c`<br/>
 `res = requests.get(url)`
 
 ### Insert message into a chat
@@ -62,7 +62,7 @@ The system will allow you this only if the user is already present in the databa
 This endpoint allows you to insert a new message into a conversation.
 The system will allow you this only if the user is already present in the database and also in the conversation.
 
-`url = http://localhost:3000/chat/5f0ca76d39a4fd996c03d553/addmessage?user_id=5f0ca75239a4fd996c03d54c&text=Hello world`
+`url = http://localhost:3000/chat/5f0ca76d39a4fd996c03d553/addmessage?user_id=5f0ca75239a4fd996c03d54c&text=Hello world`<br/>
 `res = requests.get(url)`
 
 ### Get messages list from a chat
@@ -70,7 +70,7 @@ The system will allow you this only if the user is already present in the databa
 
 This endpoint allows you to download and view the messages of a conversation through a request from the API.
 
-`url =  http://localhost:3000/chat/5f0ca76d39a4fd996c03d553/list`
+`url =  http://localhost:3000/chat/5f0ca76d39a4fd996c03d553/list`<br/>
 `res = requests.get(url)`
 
 ### Recommender analisys
@@ -79,7 +79,7 @@ This endpoint allows you to download and view the messages of a conversation thr
 This endpoint allows you to perform a recommendation analysis of similar users.
 Based on the topics of the chats, it is possible to identify users who may have affinities with the selected user
 
-`url =  http://localhost:3000/user/5f0ca75239a4fd996c03d54c/recommend`
+`url =  http://localhost:3000/user/5f0ca75239a4fd996c03d54c/recommend`<br/>
 `res = requests.get(url)`
 
 ### Sentiment analisys
@@ -88,7 +88,7 @@ Based on the topics of the chats, it is possible to identify users who may have 
 This endpoint receives an Id_conversation as a parameter, returning a sentiment analysis of all chat messages.
 Are the issues positive or negative in the chat?
 
-`url =  http://localhost:3000/chat/5f0ca76d39a4fd996c03d553/sentiment`
+`url =  http://localhost:3000/chat/5f0ca76d39a4fd996c03d553/sentiment`<br/>
 `res = requests.get(url)`
 
 
@@ -113,29 +113,29 @@ Through the geographic coordinates WGS84 (lat and long) it is possible to geoloc
 
 # Links & Resources
 
-​
+​<br/>
 - [https://flask.palletsprojects.com/]
 - [https://www.getpostman.com/]
 - [https://api.mongodb.com/python/current/api/pymongo/collection.html#pymongo.collection.Collection.insert_one]
 - [https://api.mongodb.com/python/current/tutorial.html]
 - [https://mermaid-js.github.io/mermaid/#/entityRelationshipDiagram]
-​
+​<br/>
 *NLP & Text Sentiment Analysis:*
-​
+​<br/>
 - [https://www.nltk.org/]
 - [https://towardsdatascience.com/basic-binary-sentiment-analysis-using-nltk-c94ba17ae386]
 - [https://www.digitalocean.com/community/tutorials/how-to-perform-sentiment-analysis-in-python-3-using-the-natural-language-toolkit-nltk]
-​
+​<br/>
 *Heroku & Docker*
-​
+​<br/>
 - [<https://docs.docker.com/engine/reference/builder/]>
 - [<https://runnable.com/docker/python/dockerize-your-python-application]>
 - [<https://devcenter.heroku.com/articles/container-registry-and-runtime]>
 - [<https://devcenter.heroku.com/categories/deploying-with-docker]>
-​
+​<br/>
 *Mongodb Atlas*
-​
+​<br/>
 - [<https://www.mongodb.com/cloud/atlas]>
-
+<br/>
 *The datasets used can be downloaded from the following links*\
 https://www.kaggle.com/coolcoder22/quotes-dataset
