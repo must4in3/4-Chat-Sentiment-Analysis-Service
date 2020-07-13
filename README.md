@@ -73,6 +73,25 @@ This endpoint allows you to download and view the messages of a conversation thr
 url =  http://localhost:3000/chat/`5f0ca76d39a4fd996c03d553`/list
 res = requests.get(`url`)
 
+### Recommender analisys
+/user/<user_id>/recommend
+
+This endpoint allows you to perform a recommendation analysis of similar users.
+Based on the topics of the chats, it is possible to identify users who may have affinities with the selected user
+
+url =  http://localhost:3000/user/`5f0ca75239a4fd996c03d54c`/recommend
+res = requests.get(`url`)
+
+### Sentiment analisys
+/chat/<conversation_id>/sentiment
+
+This endpoint receives an Id_conversation as a parameter, returning a sentiment analysis of all chat messages.
+Are the issues positive or negative in the chat?
+
+url =  http://localhost:3000/chat/`5f0ca76d39a4fd996c03d553`/sentiment
+res = requests.get(`url`)
+
+
 
 # Knowledge
 
