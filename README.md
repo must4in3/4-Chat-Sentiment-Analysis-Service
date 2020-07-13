@@ -1,7 +1,7 @@
 # 4-Chat-Sentiment-Analysis-Service
 analyze conversations form a chat messaging app
 
-<img src="/output/milan_map.png">
+<img src="/inputs/image.jpeg">
 
 # Overview
 *Analyze conversations form a chat messaging app (like slack or whatsapp).* 
