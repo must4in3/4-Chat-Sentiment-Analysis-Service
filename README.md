@@ -30,7 +30,7 @@ endpoints and it's our task to create those endpoints for:
 
 **@get**
 ### Create username
-/user/create/<username>
+`/user/create/<username>`
 
 With this extension of the URL it is possible to add a user into the Database.
 
@@ -38,7 +38,7 @@ url = http://localhost:3000/user/create/`Topolino`
 res = requests.get(`url`)
 
 ### Create chat
-/chat/create/<chat_name> params=`user_id` 
+`/chat/create/<chat_name> params=user_id` 
 
 With this extension of the URL it is possible to create a new chat room
 This endpoint returns JSON files to the web localhost and allows you to add new data to the mongoDb database. 
@@ -48,7 +48,7 @@ url = http://localhost:3000/chat/create/`Dumbledore’s Army`?user_id=`5f0ca7523
 res = requests.get(`url`)
 
 ### Add user into a chat
-/chat/<conversation_id>/adduser params=`user_id` 
+`/chat/<conversation_id>/adduser params=user_id` 
 
 This endpoint allows you to add a user to a conversation.
 The system will allow you this only if the user is already present in the database and is not present yet in the conversation.
@@ -57,7 +57,7 @@ url = http://localhost:3000/chat/`5f0ca76d39a4fd996c03d553`/adduser?user_id=`5f0
 res = requests.get(`url`)
 
 ### Insert message into a chat
-/chat/<conversation_id>/addmessage params=`user_id`,`text`
+`/chat/<conversation_id>/addmessage params=user_id,text`
 
 This endpoint allows you to insert a new message into a conversation.
 The system will allow you this only if the user is already present in the database and also in the conversation.
@@ -66,7 +66,7 @@ url = http://localhost:3000/chat/`5f0ca76d39a4fd996c03d553`/addmessage?user_id=`
 res = requests.get(`url`)
 
 ### Get messages list from a chat
-/chat/<conversation_id>/list
+`/chat/<conversation_id>/list`
 
 This endpoint allows you to download and view the messages of a conversation through a request from the API.
 
@@ -74,7 +74,7 @@ url =  http://localhost:3000/chat/`5f0ca76d39a4fd996c03d553`/list
 res = requests.get(`url`)
 
 ### Recommender analisys
-/user/<user_id>/recommend
+`/user/<user_id>/recommend`
 
 This endpoint allows you to perform a recommendation analysis of similar users.
 Based on the topics of the chats, it is possible to identify users who may have affinities with the selected user
@@ -83,7 +83,7 @@ url =  http://localhost:3000/user/`5f0ca75239a4fd996c03d54c`/recommend
 res = requests.get(`url`)
 
 ### Sentiment analisys
-/chat/<conversation_id>/sentiment
+`/chat/<conversation_id>/sentiment`
 
 This endpoint receives an Id_conversation as a parameter, returning a sentiment analysis of all chat messages.
 Are the issues positive or negative in the chat?
