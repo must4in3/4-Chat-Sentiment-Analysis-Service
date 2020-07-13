@@ -28,24 +28,56 @@ endpoints and it's our task to create those endpoints for:
   - **Returns:** `user_id`
 
 
-- 20 Designers
-- 5 UI/UX Engineers
-- 10 Frontend Developers
-- 15 Data Engineers
-- 5 Backend Developers
-- 20 Account Managers
-- 1 Maintenance guy that loves basketball
-- 10 Executives
-- 1 CEO/President\
-​
-All employees were asked to show their preferences on where to place the new office.
-In the project we will try to find a place that covers more or less all the following requirements.
+@get
+/user/create/<username>
+Se pueden insertar personajes en la base de datos realizando una request.post a la API como en el siguiente ejemplo. El sistema checkeará que no existan los personajes.
 
-1) Designers like to share knowledge. There must be some nearby companies that also do design.
-2) Executives like Starbucks A LOT. Ensure there's a starbucks not to far.
-3) Account managers need to travel a lot
-4) All people in the company have between 25 and 40 years, give them some place to go to party.
-5) If you want to make the maintenance guy happy, a basketball stadium must be around 10 Km.
+user ={"name":"Mike Wheeler"}
+url = "http://localhost:5000/new/user"
+requests.post(url, data=user)
+/new/chat
+Se pueden insertar chats utilizando este comando. Necesitas tener los datos en forma de diccionario.
+
+chat = { "chat_name": "friends",
+           "participants": ["Mike Wheeler","Dustin Henderson","Will","Lucas"]
+}
+url = "http://localhost:5000/new/chat"
+requests.post(url_chat, data=dchat)
+/new/message
+De esta manera insertamos un mensaje en la base de datos.
+
+mensaje = {'name': 'Once', 'chat_name': 'friends_new', 'message': 'Los amigos no mienten'}
+url = "http://localhost:5000/new/message"
+requests.post(url, data=mensaje)
+@get
+/users
+Con este endpoint obtenemos todos los usuarios.
+
+url = "http://localhost:5000/users"
+requests.get(url).json()
+/chats
+Con este endpoint podemos saber todos los grupos que hay creados
+
+url = "http://localhost:5000/chats"
+requests.get(url).json()
+/user/chat/name
+Con este endopoint obtenemos los chats en los que participa el usuario que le indiquemos.
+
+url_chats = "http://localhost:5000/user/chat/"
+name = "Mike Wheeler"
+requests.get(url_chats + name).json()
+/user/message/name
+Con este endpoint obtenemos todos los mensajes que ha escrito un usuario.
+
+url = "http://localhost:5000/user/message/"
+name = "Once"
+requests.get(url + name).json()
+/chat/message/name
+Con este endpoint obtenemos todos los mensajes que se han escrito en un chat.
+
+url = "http://localhost:5000/chat/message/"
+grupo = "hawkins"
+requests.get(url + grupo).json()
 
 # Knowledge
 
