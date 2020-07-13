@@ -28,6 +28,7 @@ endpoints and it's our task to create those endpoints for:
   - **Returns:** `user_id`
 
 
+# To enter data and make a request in an API you have to use the get method
 
 ### Create username
 `/user/create/<username>`
