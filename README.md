@@ -21,13 +21,6 @@ endpoints and it's our task to create those endpoints for:
 - Deploy the service with docker to heroku and store messages in a cloud database.
 ​
 
-`/user/create/<username>`
-​
-  - **Purpose:** Create a user and save into DB
-  - **Params:** `username` the user name
-  - **Returns:** `user_id`
-
-
 # To enter data and make a request in an API you have to use the get method
 
 ### Create username
