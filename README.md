@@ -88,12 +88,6 @@ Are the issues positive or negative in the chat?
 
 
 # Knowledge
-
-For this project I use databases in MongoDB, I make queries and geoqueries to those databases. 
-Through the geographic coordinates WGS84 (lat and long) it is possible to geolocalize Markers and display them in dynamic maps created with the folium library, or in tableau.
-
-
-
 ​
 * Create an API using `flask`
 * Use `pymongo` insert methods
