@@ -28,14 +28,14 @@ endpoints and it's our task to create those endpoints for:
   - **Returns:** `user_id`
 
 
-**@get**
+
 ### Create username
 `/user/create/<username>`
 
 With this extension of the URL it is possible to add a user into the Database.
 
-`url = http://localhost:3000/user/create/Topolino`<br/>
-`res = requests.get(url)`
+*url* = http://localhost:3000/user/create/Topolino<br/>
+*res* = `requests.get(url)`
 
 ### Create chat
 `/chat/create/<chat_name> params=user_id` 
@@ -44,8 +44,8 @@ With this extension of the URL it is possible to create a new chat room
 This endpoint returns JSON files to the web localhost and allows you to add new data to the mongoDb database. 
 Various if conditions will try to avoid errors (if the room already exists, if the user IDs are incorrect or already existing etc ..)
 
-`url = http://localhost:3000/chat/create/Dumbledore’s Army?user_id=5f0ca75239a4fd996c03d54c`<br/>
-`res = requests.get(url)`
+*url* = http://localhost:3000/chat/create/Dumbledore_sArmy?user_id=5f0ca75239a4fd996c03d54c<br/>
+*res* = `requests.get(url)`
 
 ### Add user into a chat
 `/chat/<conversation_id>/adduser params=user_id` 
@@ -53,8 +53,8 @@ Various if conditions will try to avoid errors (if the room already exists, if t
 This endpoint allows you to add a user to a conversation.
 The system will allow you this only if the user is already present in the database and is not present yet in the conversation.
 
-`url = http://localhost:3000/chat/5f0ca76d39a4fd996c03d553/adduser?user_id=5f0ca75239a4fd996c03d54c`<br/>
-`res = requests.get(url)`
+*url* = http://localhost:3000/chat/5f0ca76d39a4fd996c03d553/adduser?user_id=5f0ca75239a4fd996c03d54c<br/>
+*res* = `requests.get(url)`
 
 ### Insert message into a chat
 `/chat/<conversation_id>/addmessage params=user_id,text`
@@ -62,16 +62,16 @@ The system will allow you this only if the user is already present in the databa
 This endpoint allows you to insert a new message into a conversation.
 The system will allow you this only if the user is already present in the database and also in the conversation.
 
-`url = http://localhost:3000/chat/5f0ca76d39a4fd996c03d553/addmessage?user_id=5f0ca75239a4fd996c03d54c&text=Hello world`<br/>
-`res = requests.get(url)`
+*url* = http://localhost:3000/chat/5f0ca76d39a4fd996c03d553/addmessage?user_id=5f0ca75239a4fd996c03d54c&text=Hello_world<br/>
+*res* = `requests.get(url)`
 
 ### Get messages list from a chat
 `/chat/<conversation_id>/list`
 
 This endpoint allows you to download and view the messages of a conversation through a request from the API.
 
-`url =  http://localhost:3000/chat/5f0ca76d39a4fd996c03d553/list`<br/>
-`res = requests.get(url)`
+*url* =  http://localhost:3000/chat/5f0ca76d39a4fd996c03d553/list<br/>
+*res* = `requests.get(url)`
 
 ### Recommender analisys
 `/user/<user_id>/recommend`
@@ -79,8 +79,8 @@ This endpoint allows you to download and view the messages of a conversation thr
 This endpoint allows you to perform a recommendation analysis of similar users.
 Based on the topics of the chats, it is possible to identify users who may have affinities with the selected user
 
-`url =  http://localhost:3000/user/5f0ca75239a4fd996c03d54c/recommend`<br/>
-`res = requests.get(url)`
+*url* =  http://localhost:3000/user/5f0ca75239a4fd996c03d54c/recommend<br/>
+*res* = `requests.get(url)`
 
 ### Sentiment analisys
 `/chat/<conversation_id>/sentiment`
@@ -88,8 +88,8 @@ Based on the topics of the chats, it is possible to identify users who may have 
 This endpoint receives an Id_conversation as a parameter, returning a sentiment analysis of all chat messages.
 Are the issues positive or negative in the chat?
 
-`url =  http://localhost:3000/chat/5f0ca76d39a4fd996c03d553/sentiment`<br/>
-`res = requests.get(url)`
+*url* =  http://localhost:3000/chat/5f0ca76d39a4fd996c03d553/sentiment<br/>
+*res* = `requests.get(url)`
 
 
 
@@ -137,5 +137,6 @@ Through the geographic coordinates WGS84 (lat and long) it is possible to geoloc
 ​<br/>
 - [<https://www.mongodb.com/cloud/atlas]>
 <br/>
-*The datasets used can be downloaded from the following links*\
+*The datasets used can be downloaded from the following links*
+<br/>
 https://www.kaggle.com/coolcoder22/quotes-dataset
