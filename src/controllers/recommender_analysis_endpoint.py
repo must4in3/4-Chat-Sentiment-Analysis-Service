@@ -54,7 +54,6 @@ def createMatrixSimilarity(dictionary_chat_mess, user_id):
     # create a sparse_matrix with the count of every word
     count_vectorizer = CountVectorizer()
     sparse_matrix = count_vectorizer.fit_transform(new_dict.values())
-    #m = sparse_matrix.todense()
     # Compute Cosine Similarity matrix (or selected distance) en put it in a dataframe
     doc_term_matrix = sparse_matrix.todense()
     df = pd.DataFrame(doc_term_matrix, 
@@ -63,12 +62,6 @@ def createMatrixSimilarity(dictionary_chat_mess, user_id):
     similarity_matrix = distance(df,df)
     # Similarity dataframe and Similarity heatmap 
     sim_df = pd.DataFrame(similarity_matrix, columns=new_dict.keys(), index=new_dict.keys())
-    #print(sim_df)     #<------ display df
-    #sns.heatmap(sim_df,annot=True) <------ heatmap
-    #np.fill_diagonal(sim_df.values, 0) # Remove diagonal max values and set those to 0
-    #matrix =  sorted(sim_df[f'{user_id}'].items(), key=lambda x: x[1], reverse=True)
-    # find username that made the request
     username = db.user.find_one({'_id': ObjectId(user_id)})
     similarity_column = sim_df[f'{username["username"]}'].sort_values(ascending=False)
     return similarity_column
-

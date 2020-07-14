@@ -4,14 +4,9 @@ from flask import request
 import json
 from bson import json_util, ObjectId
 from src.helpers.errorHelpers import errorHelper, APIError, Error404, checkValidParams
-#nltk libraries and modules
 from nltk.tokenize import sent_tokenize,word_tokenize
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 import nltk
-#nltk.download('punkt')
-#nltk.download('stopwords')
-#nltk.download('vader_lexicon')
-#nltk.download('averaged_perceptron_tagger')
 
 
 @app.route("/chat/<conversation_id>/sentiment")
