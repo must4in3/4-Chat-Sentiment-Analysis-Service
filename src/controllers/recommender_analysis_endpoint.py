@@ -65,5 +65,3 @@ def createMatrixSimilarity(dictionary_chat_mess, user_id):
     username = db.user.find_one({'_id': ObjectId(user_id)})
     similarity_column = sim_df[f'{username["username"]}'].sort_values(ascending=False)
     return similarity_column
-
--
