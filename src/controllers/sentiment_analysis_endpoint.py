@@ -1,22 +1,17 @@
+from src.db_mongo import client, db
 from src.app import app
 from flask import request
-from pymongo import MongoClient
 import json
 from bson import json_util, ObjectId
-from src.config import DBURL
 from src.helpers.errorHelpers import errorHelper, APIError, Error404, checkValidParams
 #nltk libraries and modules
 from nltk.tokenize import sent_tokenize,word_tokenize
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 import nltk
-nltk.download('punkt')
-nltk.download('stopwords')
-nltk.download('vader_lexicon')
-nltk.download('averaged_perceptron_tagger')
-
-client = MongoClient(DBURL)
-print(f'connected to db {DBURL}')
-db = client.get_default_database()
+#nltk.download('punkt')
+#nltk.download('stopwords')
+#nltk.download('vader_lexicon')
+#nltk.download('averaged_perceptron_tagger')
 
 
 @app.route("/chat/<conversation_id>/sentiment")
@@ -36,8 +31,9 @@ def sentimentAnalysis(conversation_id):
                     chat_mess.append(mess['message'])
                 except:
                     pass
-        pol = polarityBySentence(chat_mess)
-        return json.dumps(pol)
+        if len(chat_mess) > 0:
+            return json.dumps(polarityBySentence(chat_mess))
+        raise Error404('List empty')
     raise APIError('Error. chat doesn\'t exist')   
 
 
@@ -50,7 +46,6 @@ def polarityBySentence(phrases_list):
     pol = []
     for phrase in phrases_list:
         tokenized_text=sent_tokenize(phrase)
-        print(tokenized_text)
         for sentence in tokenized_text:
             scores = sid.polarity_scores(sentence)
             pol.append({'sentence': sentence, 'sentiment': scores})
