@@ -1,19 +1,13 @@
+from src.db_mongo import client, db
 from src.app import app
 from flask import request
-from pymongo import MongoClient
 import json
 import pandas as pd
 import numpy as np
 from bson import json_util, ObjectId
 from src.helpers.errorHelpers import errorHelper, APIError, Error404, checkValidParams
-from src.config import DBURL
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity as distance
-
-
-client = MongoClient(DBURL)
-print(f'connected to db {DBURL}')
-db = client.get_default_database()
 
 
 @app.route("/user/<user_id>/recommend")
@@ -60,7 +54,7 @@ def createMatrixSimilarity(dictionary_chat_mess, user_id):
     # create a sparse_matrix with the count of every word
     count_vectorizer = CountVectorizer()
     sparse_matrix = count_vectorizer.fit_transform(new_dict.values())
-    m = sparse_matrix.todense()
+    #m = sparse_matrix.todense()
     # Compute Cosine Similarity matrix (or selected distance) en put it in a dataframe
     doc_term_matrix = sparse_matrix.todense()
     df = pd.DataFrame(doc_term_matrix, 
